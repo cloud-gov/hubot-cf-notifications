@@ -11,10 +11,12 @@
     "hubot": "2.x"
   },
   "devDependencies": {
-    "coffee-script": "^1.4.0"
+    "coffee-script": "^1.4.0",
+    "mocha": "^2.2.4",
+    "mocha-sinon": "^1.1.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
