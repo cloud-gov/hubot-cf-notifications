@@ -1,0 +1,33 @@
+{
+  "name": "hubot-cf-notifications",
+  "version": "0.1.0",
+  "description": "Plugin to add Cloud Foundry notifications to Hubot",
+  "main": "index.coffee",
+  "dependencies": {
+    "simple-oauth2": "^0.2.1",
+    "deep-extend": "^0.3.3",
+    "request": "^2.55.0",
+    "mu2": "^0.5.20",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/18F/hubot-cf-notifications.git"
+  },
+  "keywords": [
+    "hubot",
+    "hubot-scripts"
+  ],
+  "author": "Aidan Feldman <aidan.feldman@gmail.com>",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/18F/hubot-cf-notifications/issues"
+  },
+  "homepage": "https://github.com/18F/hubot-cf-notifications#readme"
+}
