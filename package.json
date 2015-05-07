@@ -13,7 +13,7 @@
   "devDependencies": {
     "coffee-script": "^1.4.0",
     "mocha": "^2.2.4",
-    "sinon": "^1.14.1"
+    "mocha-sinon": "^1.1.4"
   },
   "scripts": {
     "test": "mocha"
