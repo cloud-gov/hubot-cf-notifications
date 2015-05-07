@@ -4,11 +4,11 @@
   "description": "Plugin to add Cloud Foundry notifications to Hubot",
   "main": "index.coffee",
   "dependencies": {
-    "simple-oauth2": "^0.2.1",
     "deep-extend": "^0.3.3",
-    "request": "^2.55.0",
-    "mu2": "^0.5.20",
-    "underscore": "^1.8.3"
+    "request": "^2.55.0"
+  },
+  "peerDependencies": {
+    "hubot": "2.x"
   },
   "devDependencies": {
     "coffee-script": "^1.4.0"
@@ -24,7 +24,7 @@
     "hubot",
     "hubot-scripts"
   ],
-  "author": "Aidan Feldman <aidan.feldman@gmail.com>",
+  "author": "Aidan Feldman <aidan.feldman@gsa.gov>",
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/18F/hubot-cf-notifications/issues"
