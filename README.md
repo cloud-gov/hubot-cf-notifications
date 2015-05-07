@@ -1,3 +1,3 @@
-# Cloud Foundry Notifications Plugin for Hubot
+# Cloud Foundry Notifications for Hubot
 
-See the instructions at the top of [`notifications.coffee`](scripts/notifications.coffee) to
+[Hubot](https://hubot.github.com/) plugin – see the instructions at the top of [`notifications.coffee`](scripts/notifications.coffee) for configuration information.
