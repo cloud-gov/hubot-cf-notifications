@@ -8,15 +8,6 @@
 #   HUBOT_CF_UAA_ORIGIN
 #   HUBOT_CF_ROOM (default to `cf-notifications`)
 #
-# Notes:
-#   Create the client credentials via:
-#
-#     cf create-user hubot-cf-listener <password>
-#     # add read-only permissions for the appropriate orgs/spaces
-#     cf set-org-role hubot-cf-listener <org> OrgAuditor
-#
-#   then set HUBOT_CF_USER and HUBOT_CF_PASS.
-#
 # Author:
 #   afeld
 
