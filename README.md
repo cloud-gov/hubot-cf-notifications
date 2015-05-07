@@ -1,6 +1,6 @@
 # Cloud Foundry Notifications for Hubot
 
-[Hubot](https://hubot.github.com/) plugin that posts notifications of Cloud Foundry activity via Hubot. When deploying, it sends a notification to the specified channel. Example:
+[Hubot](https://hubot.github.com/) plugin that posts deployment notifications of applications within Cloud Foundry. Example:
 
 **someuser@myorg.com, from the terminal**
 
@@ -11,7 +11,7 @@ cf push someapp
 **Hubot, in the #cf-notifications chat room**
 
 ```
-someuser@myorg.com is deploying someapp
+Hubot: someuser@myorg.com is deploying someapp
 ```
 
 ## Installation
