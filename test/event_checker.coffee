@@ -16,6 +16,11 @@ describe 'event_checker', ->
       assert.equal(event.entity.metadata.request.state, 'STOPPED')
       assert(!checker.isDeploy(event))
 
+    it "returns false for cf-ssh events", ->
+      event = fixtures.getStartedEvent()
+      event.entity.actee_name = 'some-app-ssh'
+      assert(!checker.isDeploy(event))
+
   describe '.getRequestOpts()', ->
     it "formats the timestamp properly", ->
       # https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Parameters

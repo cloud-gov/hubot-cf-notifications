@@ -19,9 +19,16 @@ module.exports = {
     client.call opts, (error, response, data) ->
       callback(error, data.resources)
 
-  isDeploy: (event) ->
-    # a mediocre proxy for an existing app being `push`ed, since it has false positives like new instances starting
+  # check for apps deployed to support https://github.com/cloudfoundry-community/cf-ssh
+  isCfSsh: (event) ->
+    /-ssh$/.test(event.entity.actee_name)
+
+  # a mediocre proxy for an existing app being `push`ed, since it has false positives like new instances starting
+  isAppStarting: (event) ->
     event.entity.metadata?.request?.state is 'STARTED'
+
+  isDeploy: (event) ->
+    !@isCfSsh(event) && @isAppStarting(event)
 
   getDeployEntities: (since, callback) ->
     @getUpdateEvents since, (error, events) =>
