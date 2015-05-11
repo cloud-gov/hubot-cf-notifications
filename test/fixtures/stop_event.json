@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "guid": "29fbdd12-d1f2-4a22-b4d1-bae7d5fbe717",
+    "url": "/v2/events/29fbdd12-d1f2-4a22-b4d1-bae7d5fbe717",
+    "created_at": "2015-04-15T00:55:36Z",
+    "updated_at": null
+  },
+  "entity": {
+    "type": "audit.app.update",
+    "actor": "uaa-id-110",
+    "actor_type": "user",
+    "actor_name": "user@email.com",
+    "actee": "356eb57a-7ca4-4055-a85f-6e18a2379232",
+    "actee_type": "app",
+    "actee_name": "name-725",
+    "timestamp": "2015-04-15T00:55:36Z",
+    "metadata": {
+      "request": {
+        "name": "new",
+        "instances": 1,
+        "memory": 84,
+        "state": "STOPPED",
+        "environment_json": "PRIVATE DATA HIDDEN"
+      }
+    },
+    "space_guid": "9a536646-e6f2-49ff-9858-80990cc572bb",
+    "organization_guid": "be272a3a-b14c-4be9-95c2-9a9d2c13868a"
+  }
+}
