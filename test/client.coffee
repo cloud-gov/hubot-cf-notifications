@@ -1,4 +1,5 @@
-require('mocha-sinon')
+# https://github.com/elliotf/mocha-sinon#using-mochas-flakey---watch-flag
+require('mocha-sinon')()
 
 assert = require('assert')
 client = require('../src/client')

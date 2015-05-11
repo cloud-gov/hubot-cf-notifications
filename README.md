@@ -42,6 +42,8 @@ Hubot: someuser@myorg.com is deploying someapp
 
     ```bash
     cf set-org-role hubot-cf-listener <org> OrgAuditor
+    # or
+    cf set-space-role hubot-cf-listener <org> <space> SpaceAuditor
     ```
 
 1. Set the following environment variables:
