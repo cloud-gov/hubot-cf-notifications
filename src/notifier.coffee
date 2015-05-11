@@ -1,3 +1,5 @@
+checker = require('./event_checker')
+
 module.exports = {
   roomFor: (entity) ->
     # TODO map to particular rooms based on organization_guid
@@ -12,4 +14,17 @@ module.exports = {
   processEntities: (entities, robot) ->
     for entity in entities
       @processEntity(entity, robot)
+
+  notify: (since, robot) ->
+    checker.getDeployEntities since, (error, entities) =>
+      @processEntities(entities, robot)
+
+  notifyForDeploys: (robot) ->
+    # poll for deployment events
+    lastCheckedAt = new Date()
+
+    setInterval(=>
+      @notify(lastCheckedAt, robot)
+      lastCheckedAt = new Date()
+    , 5000)
 }

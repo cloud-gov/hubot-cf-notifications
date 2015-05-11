@@ -11,27 +11,11 @@
 # Author:
 #   afeld
 
-checker = require('../src/event_checker')
-notifier = require('../src/notifier')
-
-notifyForDeploys = (robot) ->
-  # poll for deployment events
-  lastCheckedAt = new Date()
-
-  setInterval(->
-    checker.getDeployEntities lastCheckedAt, (error, entities) ->
-      notifier.processEntities(entities, robot)
-    lastCheckedAt = new Date()
-  , 5000)
-
-
 # check if run directly, for testing
 if require.main is module
-  since = new Date()
-  since.setHours(since.getHours() - 1)
-  checker.getDeployEntities since, (error, entities) ->
-    console.log('error:', error)
-    console.log(entities)
+  checker = require('../src/event_checker')
+  checker.printRecent()
 else
+  notifier = require('../src/notifier')
   module.exports = (robot) ->
-    notifyForDeploys(robot)
+    notifier.notifyForDeploys(robot)

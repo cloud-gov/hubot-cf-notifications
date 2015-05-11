@@ -1,3 +1,4 @@
+util = require('util')
 client = require('../src/client')
 
 module.exports = {
@@ -29,4 +30,16 @@ module.exports = {
       else
         entities = (event.entity for event in events when @isDeploy(event))
         callback(null, entities)
+
+  # for debugging
+  printRecent: ->
+    since = new Date()
+    since.setHours(since.getHours() - 3)
+
+    @getDeployEntities since, (error, entities) ->
+      console.log('error:', error)
+      console.log(util.inspect(entities,
+        colors: true,
+        depth: null
+      ))
 }
