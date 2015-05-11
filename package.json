@@ -1,6 +1,6 @@
 {
   "name": "hubot-cf-notifications",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Plugin to add Cloud Foundry notifications to Hubot",
   "main": "index.coffee",
   "dependencies": {
