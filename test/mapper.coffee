@@ -23,21 +23,24 @@ describe 'mapper', ->
         done(err)
 
   describe '.roomForEntity()', ->
+    entity = null
+
+    beforeEach ->
+      event = fixtures.getStartedEvent()
+      entity = event.entity
+      this.sinon.stub(mapper, 'orgNameByGuid').callsArgWith(1, null, 'myorg')
+
     it "uses the default room when there isn't a match", (done) ->
       this.sinon.stub(mapper, 'getConfig').returns({})
-      this.sinon.stub(mapper, 'orgNameByGuid').callsArgWith(1, null, 'otherorg')
 
-      event = fixtures.getStartedEvent()
-      mapper.roomForEntity event.entity, (err, room) ->
+      mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'cf-notifications')
         done(err)
 
     it "allows the default room to be overridden", (done) ->
       this.sinon.stub(mapper, 'getConfig').returns(room: 'notification-center')
-      this.sinon.stub(mapper, 'orgNameByGuid').callsArgWith(1, null, 'otherorg')
 
-      event = fixtures.getStartedEvent()
-      mapper.roomForEntity event.entity, (err, room) ->
+      mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'notification-center')
         done(err)
 
@@ -49,9 +52,7 @@ describe 'mapper', ->
           }
         }
       )
-      this.sinon.stub(mapper, 'orgNameByGuid').callsArgWith(1, null, 'myorg')
 
-      event = fixtures.getStartedEvent()
-      mapper.roomForEntity event.entity, (err, room) ->
+      mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'myorgroom')
         done(err)
