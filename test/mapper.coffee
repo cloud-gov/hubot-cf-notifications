@@ -2,6 +2,7 @@
 require('mocha-sinon')()
 
 assert = require('assert')
+fs = require('fs')
 path = require('path')
 client = require('../src/client')
 mapper = require('../src/mapper')
@@ -13,6 +14,12 @@ describe 'mapper', ->
       actual = mapper.configPath()
       expected = path.resolve(__dirname, '../apps.json')
       assert.equal(actual, expected)
+
+  describe '.getConfig()', ->
+    it "handles a missing config file", ->
+      # sanity check
+      assert.equal(mapper.configExists(), false)
+      assert.deepEqual(mapper.getConfig(), {})
 
   describe '.orgNameByGuid()', ->
     it "fetches the name from the API", (done) ->

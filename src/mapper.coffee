@@ -7,11 +7,16 @@ module.exports = {
   configPath: ->
     path.resolve(appRoot.toString(), 'apps.json')
 
+  configExists: ->
+    fs.existsSync(@configPath())
+
   getConfig: ->
     # TODO cache config
-    # TODO handle missing file
-    contents = fs.readFileSync(@configPath())
-    JSON.parse(contents)
+    if @configExists()
+      contents = fs.readFileSync(@configPath())
+      JSON.parse(contents)
+    else
+      {}
 
   orgNameByGuid: (guid, callback) ->
     opts = {
