@@ -51,4 +51,21 @@ Hubot: someuser@myorg.com is deploying someapp
     * `HUBOT_CF_PASS` – password of listener user
     * `HUBOT_CF_API_ORIGIN` – something like `https://api.mycf.com` – look in `~/.cf/config.json` for `Target`
     * `HUBOT_CF_UAA_ORIGIN` – something like `https://uaa.mycf.com` – look in `~/.cf/config.json` for `UaaEndpoint`
-    * `HUBOT_CF_ROOM` – optional, defaults to to `cf-notifications`
+
+## Configuration
+
+*Optional.* To have notification directed to specific chat rooms/channels, create a `cf_config.json` file in the root of your Hubot directory. All sections are optional.
+
+```javascript
+{
+  // Mappings of notifications from particular organizations to particular rooms.
+  "orgs": {
+    "myorg": {
+      "room": "myroom"
+    },
+    // ...
+  },
+  // The room to direct notifications to, if not otherwise specified above. Defaults to `cf-notifications`.
+  "room": "notification-central"
+}
+```
