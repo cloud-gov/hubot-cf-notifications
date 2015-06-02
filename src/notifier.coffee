@@ -1,15 +1,14 @@
 checker = require('./event_checker')
+mapper = require('./mapper')
 
 module.exports = {
-  roomFor: (entity) ->
-    # TODO map to particular rooms based on organization_guid
-    process.env.HUBOT_CF_ROOM || 'cf-notifications'
-
   processEntity: (entity, robot) ->
-    envelope = {
-      room: @roomFor(entity)
-    }
-    robot.send(envelope, "#{entity.actor_name} is deploying #{entity.actee_name}")
+    mapper.roomForEntity entity, (err, room) ->
+      # TODO handle error
+      envelope = {
+        room: room
+      }
+      robot.send(envelope, "#{entity.actor_name} is deploying #{entity.actee_name}")
 
   processEntities: (entities, robot) ->
     for entity in entities
