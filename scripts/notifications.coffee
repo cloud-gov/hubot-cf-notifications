@@ -6,7 +6,6 @@
 #   HUBOT_CF_PASS
 #   HUBOT_CF_API_ORIGIN
 #   HUBOT_CF_UAA_ORIGIN
-#   HUBOT_CF_ROOM (default to `cf-notifications`)
 #
 # Author:
 #   afeld
