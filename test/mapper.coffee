@@ -3,18 +3,11 @@ require('mocha-sinon')()
 
 assert = require('assert')
 fs = require('fs')
-path = require('path')
 client = require('../src/client')
 mapper = require('../src/mapper')
 fixtures = require('./support/fixtures')
 
 describe 'mapper', ->
-  describe '.configPath()', ->
-    it "defaults to the process root directory", ->
-      actual = mapper.configPath()
-      expected = path.resolve(__dirname, '../cf_config.json')
-      assert.equal(actual, expected)
-
   describe '.getConfig()', ->
     it "handles a missing config file", ->
       # sanity check

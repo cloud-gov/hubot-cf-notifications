@@ -1,19 +1,17 @@
-appRoot = require('app-root-path')
 fs = require('fs')
-path = require('path')
 client = require('../src/client')
 
-module.exports = {
-  configPath: ->
-    path.resolve(appRoot.toString(), 'cf_config.json')
+# using just the filename will be relative to process.cwd()
+configPath = 'cf_config.json'
 
+module.exports = {
   configExists: ->
-    fs.existsSync(@configPath())
+    fs.existsSync(configPath)
 
   getConfig: ->
     # TODO cache config
     if @configExists()
-      contents = fs.readFileSync(@configPath())
+      contents = fs.readFileSync(configPath)
       JSON.parse(contents)
     else
       {}
