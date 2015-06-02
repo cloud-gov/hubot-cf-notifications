@@ -1,3 +1,4 @@
+# draws inspiration from https://github.com/atmos/hubot-deploy/blob/master/docs/config-file.md
 fs = require('fs')
 client = require('../src/client')
 

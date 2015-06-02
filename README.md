@@ -69,3 +69,8 @@ Hubot: someuser@myorg.com is deploying someapp
   "room": "notification-central"
 }
 ```
+
+## See also
+
+* [hubot-cf](https://github.com/andypiper/hubot-cf)
+* [hubot-deploy](https://github.com/atmos/hubot-deploy)
