@@ -11,6 +11,7 @@
     "hubot": "2.x"
   },
   "devDependencies": {
+    "app-root-path": "^1.0.0",
     "coffee-script": "^1.4.0",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4"
