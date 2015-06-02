@@ -12,7 +12,7 @@ describe 'mapper', ->
   describe '.configPath()', ->
     it "defaults to the process root directory", ->
       actual = mapper.configPath()
-      expected = path.resolve(__dirname, '../apps.json')
+      expected = path.resolve(__dirname, '../cf_config.json')
       assert.equal(actual, expected)
 
   describe '.getConfig()', ->

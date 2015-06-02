@@ -5,7 +5,7 @@ client = require('../src/client')
 
 module.exports = {
   configPath: ->
-    path.resolve(appRoot.toString(), 'apps.json')
+    path.resolve(appRoot.toString(), 'cf_config.json')
 
   configExists: ->
     fs.existsSync(@configPath())
@@ -27,7 +27,6 @@ module.exports = {
 
   roomForOrg: (name) ->
     config = @getConfig()
-
     config.orgs?[name].room ||
       config.room ||
       process.env.HUBOT_CF_ROOM ||  # TODO drop environment variable support
