@@ -78,6 +78,14 @@ To run tests:
 npm test
 ```
 
+To check for code coverage:
+
+```bash
+npm test
+./node_modules/.bin/istanbul report
+open coverage/lcov-report/hubot-cf-notifications/src/index.html
+```
+
 ## See also
 
 * [hubot-cf](https://github.com/andypiper/hubot-cf)

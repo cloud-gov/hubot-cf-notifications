@@ -11,7 +11,9 @@
     "hubot": "2.x"
   },
   "devDependencies": {
+    "coffee-coverage": "^0.6.0",
     "coffee-script": "^1.4.0",
+    "istanbul": "^0.3.14",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4",
     "nock": "^2.3.0",
