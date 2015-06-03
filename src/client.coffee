@@ -19,7 +19,7 @@ module.exports = {
     }
 
   call: (opts, callback) ->
-    credentials.fetchTokenObj (token) =>
+    credentials.fetchTokenObj().then (token) =>
       allOpts = @generalRequestOpts(token.access_token)
       deepExtend(allOpts, opts)
 

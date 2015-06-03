@@ -2,15 +2,23 @@
 require('mocha-sinon')()
 
 assert = require('assert')
+Promise = require('bluebird')
 nock = require('nock')
 client = require('../src/client')
 credentials = require('../src/credentials')
 
 describe 'client', ->
   describe '.call()', ->
+    stubWithToken = (accessToken) ->
+      promise = new Promise (fulfill, reject) ->
+        fulfill(access_token: accessToken)
+
+      # TODO figure out how to hold onto the context
+      this.sinon.stub(credentials, 'fetchTokenObj').returns(promise)
+
     it "passes the data to the callback", (done) ->
       this.sinon.stub(client, 'apiOrigin').returns('http://api.host.com')
-      this.sinon.stub(credentials, 'fetchTokenObj').callsArgWith(0, access_token: '123')
+      stubWithToken.call(this, '123')
 
       nock('http://api.host.com').get('/foo').reply(200, bar: 'baz')
 

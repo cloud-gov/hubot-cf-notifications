@@ -4,8 +4,10 @@
   "description": "Plugin to add Cloud Foundry notifications to Hubot",
   "main": "index.coffee",
   "dependencies": {
+    "bluebird": "^2.9.27",
     "deep-extend": "^0.3.3",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "request-promise": "^0.4.2"
   },
   "peerDependencies": {
     "hubot": "2.x"
