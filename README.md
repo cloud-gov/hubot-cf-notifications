@@ -70,6 +70,14 @@ Hubot: someuser@myorg.com is deploying someapp
 }
 ```
 
+## Development
+
+To run tests:
+
+```bash
+npm test
+```
+
 ## See also
 
 * [hubot-cf](https://github.com/andypiper/hubot-cf)
