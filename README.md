@@ -72,9 +72,10 @@ Hubot: someuser@myorg.com is deploying someapp
 
 ## Development
 
-To run tests:
+To run tests, clone the repository, then from the project directory run:
 
 ```bash
+npm install
 npm test
 ```
 
