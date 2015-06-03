@@ -81,9 +81,7 @@ npm test
 To check for code coverage:
 
 ```bash
-npm test
-./node_modules/.bin/istanbul report
-open coverage/lcov-report/hubot-cf-notifications/src/index.html
+npm run-script coverage
 ```
 
 ## See also
