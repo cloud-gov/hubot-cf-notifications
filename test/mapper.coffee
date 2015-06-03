@@ -17,7 +17,7 @@ describe 'mapper', ->
 
   describe '.orgNameByGuid()', ->
     it "fetches the name from the API", (done) ->
-      this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'someorg'})
+      this.sinon.stub(client, 'request').callsArgWith(1, null, {}, {name: 'someorg'})
 
       mapper.orgNameByGuid '123456', (err, name)->
         assert.equal(name, 'someorg')
@@ -35,7 +35,7 @@ describe 'mapper', ->
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
-      this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'myorg'})
+      this.sinon.stub(client, 'request').callsArgWith(1, null, {}, {name: 'myorg'})
       origCwd = process.cwd()
       testTempDir = new temporary.Dir()
       process.chdir(testTempDir.path)

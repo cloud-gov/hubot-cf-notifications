@@ -21,7 +21,7 @@ module.exports = {
     opts = {
       path: "/v2/organizations/#{guid}/summary"
     }
-    client.call opts, (error, response, data) ->
+    client.request opts, (error, response, data) ->
       callback(error, data.name)
 
   roomForOrg: (name) ->

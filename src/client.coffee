@@ -18,7 +18,7 @@ module.exports = {
       useQuerystring: true
     }
 
-  call: (opts, callback) ->
+  request: (opts, callback) ->
     credentials.fetchTokenObj().then (token) =>
       allOpts = @generalRequestOpts(token.access_token)
       deepExtend(allOpts, opts)

@@ -23,7 +23,7 @@ describe 'client', ->
       nock('http://api.host.com').get('/foo').reply(200, bar: 'baz')
 
       opts = {path: '/foo'}
-      client.call opts, (error, response, data) ->
+      client.request opts, (error, response, data) ->
         assert.deepEqual(data, bar: 'baz')
         done(error)
 
