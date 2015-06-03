@@ -25,21 +25,21 @@ describe 'mapper', ->
 
   describe '.roomForEntity()', ->
     entity = null
-    orig_cwd = null
-    test_temp_dir = null
+    origCwd = null
+    testTempDir = null
 
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
       this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'myorg'})
-      orig_cwd = process.cwd()
-      test_temp_dir = new temporary.Dir()
-      process.chdir(test_temp_dir.path)
+      origCwd = process.cwd()
+      testTempDir = new temporary.Dir()
+      process.chdir(testTempDir.path)
 
     afterEach ->
       fs.unlinkSync('cf_config.json')
-      process.chdir(orig_cwd)
-      test_temp_dir.rmdir()
+      process.chdir(origCwd)
+      testTempDir.rmdir()
 
     it "uses the default room when there isn't a match", (done) ->
       fs.writeFileSync('cf_config.json', JSON.stringify({}))
