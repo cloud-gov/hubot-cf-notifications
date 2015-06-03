@@ -28,6 +28,10 @@ describe 'mapper', ->
     origCwd = null
     testTempDir = null
 
+    writeConfig = (data) ->
+      json = JSON.stringify(data)
+      fs.writeFileSync('cf_config.json', json)
+
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
@@ -42,28 +46,27 @@ describe 'mapper', ->
       testTempDir.rmdir()
 
     it "uses the default room when there isn't a match", (done) ->
-      fs.writeFileSync('cf_config.json', JSON.stringify({}))
+      writeConfig({})
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'cf-notifications')
         done(err)
 
     it "allows the default room to be overridden", (done) ->
-      fs.writeFileSync('cf_config.json', JSON.stringify(
-        {room: 'notification-center'}))
+      writeConfig({ room: 'notification-center' })
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'notification-center')
         done(err)
 
     it "finds the org that matches the room", (done) ->
-      fs.writeFileSync('cf_config.json', JSON.stringify({
+      writeConfig({
         orgs: {
           myorg: {
             room: 'myorgroom'
           }
         }
-      }))
+      })
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'myorgroom')
