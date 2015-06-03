@@ -6,6 +6,7 @@ fs = require('fs')
 client = require('../src/client')
 mapper = require('../src/mapper')
 fixtures = require('./support/fixtures')
+temporary = require('temporary')
 
 describe 'mapper', ->
   describe '.getConfig()', ->
@@ -24,34 +25,45 @@ describe 'mapper', ->
 
   describe '.roomForEntity()', ->
     entity = null
+    orig_cwd = null
+    test_temp_dir = null
 
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
-      this.sinon.stub(mapper, 'orgNameByGuid').callsArgWith(1, null, 'myorg')
+      this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'myorg'})
+      orig_cwd = process.cwd()
+      test_temp_dir = new temporary.Dir()
+      process.chdir(test_temp_dir.path)
+
+    afterEach ->
+      fs.unlinkSync('cf_config.json')
+      process.chdir(orig_cwd)
+      test_temp_dir.rmdir()
 
     it "uses the default room when there isn't a match", (done) ->
-      this.sinon.stub(mapper, 'getConfig').returns({})
+      fs.writeFileSync('cf_config.json', JSON.stringify({}))
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'cf-notifications')
         done(err)
 
     it "allows the default room to be overridden", (done) ->
-      this.sinon.stub(mapper, 'getConfig').returns(room: 'notification-center')
+      fs.writeFileSync('cf_config.json', JSON.stringify(
+        {room: 'notification-center'}))
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'notification-center')
         done(err)
 
     it "finds the org that matches the room", (done) ->
-      this.sinon.stub(mapper, 'getConfig').returns(
+      fs.writeFileSync('cf_config.json', JSON.stringify({
         orgs: {
           myorg: {
             room: 'myorgroom'
           }
         }
-      )
+      }))
 
       mapper.roomForEntity entity, (err, room) ->
         assert.equal(room, 'myorgroom')

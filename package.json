@@ -14,7 +14,8 @@
     "coffee-script": "^1.4.0",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4",
-    "nock": "^2.3.0"
+    "nock": "^2.3.0",
+    "temporary": "0.0.8"
   },
   "scripts": {
     "test": "mocha"
