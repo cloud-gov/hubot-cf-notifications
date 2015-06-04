@@ -12,8 +12,8 @@
 
 # check if run directly, for testing
 if require.main is module
-  checker = require('../src/event_checker')
-  checker.printRecent()
+  tests = require('../src/smoke_tests')
+  tests.printRecent()
 else
   notifier = require('../src/notifier')
   module.exports = (robot) ->
