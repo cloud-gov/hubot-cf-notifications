@@ -12,13 +12,15 @@
   },
   "devDependencies": {
     "coffee-script": "^1.4.0",
+    "coffeelint": "^1.10.1",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4",
     "nock": "^2.3.0",
     "temporary": "0.0.8"
   },
   "scripts": {
-    "test": "mocha"
+    "lint": "./node_modules/.bin/coffeelint scripts src test",
+    "test": "npm run lint && mocha"
   },
   "repository": {
     "type": "git",
