@@ -1,5 +1,5 @@
 deepExtend = require('deep-extend')
-request = require('request')
+request = require('request-promise')
 credentials = require('../src/credentials')
 
 
@@ -18,7 +18,7 @@ module.exports = {
       useQuerystring: true
     }
 
-  request: (opts, callback) ->
+  request: (opts) ->
     credentials.fetchTokenObj().then (token) =>
       allOpts = @generalRequestOpts(token.access_token)
       deepExtend(allOpts, opts)
@@ -27,5 +27,5 @@ module.exports = {
         allOpts.url = @resolveUrl(opts.path)
         delete allOpts.path
 
-      request(allOpts, callback)
+      request(allOpts)
 }

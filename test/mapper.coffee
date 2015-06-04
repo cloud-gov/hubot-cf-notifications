@@ -3,12 +3,19 @@ require('mocha-sinon')()
 
 assert = require('assert')
 fs = require('fs')
+Promise = require('bluebird')
 client = require('../src/client')
 mapper = require('../src/mapper')
 fixtures = require('./support/fixtures')
 temporary = require('temporary')
 
 describe 'mapper', ->
+  # needs to be called with context of the test
+  stubOrg = (name) ->
+    promise = new Promise (fulfill) ->
+      fulfill(name: name)
+    this.sinon.stub(client, 'request').returns(promise)
+
   describe '.getConfig()', ->
     it "handles a missing config file", ->
       # sanity check
@@ -17,7 +24,7 @@ describe 'mapper', ->
 
   describe '.orgNameByGuid()', ->
     it "fetches the name from the API", (done) ->
-      this.sinon.stub(client, 'request').callsArgWith(1, null, {}, {name: 'someorg'})
+      stubOrg.call(this, 'someorg')
 
       mapper.orgNameByGuid '123456', (err, name)->
         assert.equal(name, 'someorg')
@@ -35,7 +42,7 @@ describe 'mapper', ->
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
-      this.sinon.stub(client, 'request').callsArgWith(1, null, {}, {name: 'myorg'})
+      stubOrg.call(this, 'myorg')
       origCwd = process.cwd()
       testTempDir = new temporary.Dir()
       process.chdir(testTempDir.path)

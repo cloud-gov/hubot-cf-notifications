@@ -16,16 +16,14 @@ describe 'client', ->
       # TODO figure out how to hold onto the context
       this.sinon.stub(credentials, 'fetchTokenObj').returns(promise)
 
-    it "passes the data to the callback", (done) ->
+    it "passes the data to the Promise", ->
       this.sinon.stub(client, 'apiOrigin').returns('http://api.host.com')
       stubWithToken.call(this, '123')
 
       nock('http://api.host.com').get('/foo').reply(200, bar: 'baz')
 
-      opts = {path: '/foo'}
-      client.request opts, (error, response, data) ->
+      client.request(path: '/foo').then (data) ->
         assert.deepEqual(data, bar: 'baz')
-        done(error)
 
   describe '.resolveUrl()', ->
     it "returns the absolute URL", ->

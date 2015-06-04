@@ -16,7 +16,7 @@ module.exports = {
 
   getUpdateEvents: (since, callback) ->
     opts = @getRequestOpts(since)
-    client.request opts, (error, response, data) ->
+    client.request(opts).then (data) ->
       callback(error, data.resources)
 
   # check for apps deployed to support https://github.com/cloudfoundry-community/cf-ssh

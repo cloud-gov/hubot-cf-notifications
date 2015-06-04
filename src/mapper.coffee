@@ -21,8 +21,12 @@ module.exports = {
     opts = {
       path: "/v2/organizations/#{guid}/summary"
     }
-    client.request opts, (error, response, data) ->
-      callback(error, data.name)
+    onSuccess = (data) ->
+      callback(null, data.name)
+    onError = (error) ->
+      callback(error)
+
+    client.request(opts).then(onSuccess, onError)
 
   roomForOrg: (name) ->
     config = @getConfig()
