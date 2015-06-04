@@ -79,10 +79,10 @@ npm install
 npm test
 ```
 
-To check for code coverage:
+To check code coverage:
 
 ```bash
-npm run-script coverage
+npm run coverage
 ```
 
 ## See also
