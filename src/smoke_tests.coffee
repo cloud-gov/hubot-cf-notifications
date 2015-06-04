@@ -4,21 +4,25 @@ notifier = require('./notifier')
 
 
 module.exports = {
+  # to make testing easier
+  log: ->
+    console.log.apply(console, arguments)
+
   printNotifications: (entities) ->
-    console.log("Notifications:")
-    console.log("--------------")
+    @log("Notifications:")
+    @log("--------------")
 
     # fake Hubot
     robot = {
-      send: (envelope, msg) ->
-        console.log("#{envelope.room}: #{msg}")
+      send: (envelope, msg) =>
+        @log("#{envelope.room}: #{msg}")
     }
     notifier.processEntities(entities, robot)
 
   printEntities: (entities) ->
-    console.log("Recent deployment events:")
-    console.log("-------------------------")
-    console.log(util.inspect(entities,
+    @log("Recent deployment events:")
+    @log("-------------------------")
+    @log(util.inspect(entities,
       colors: true,
       depth: null
     ))
@@ -32,9 +36,9 @@ module.exports = {
         throw error
       else
         @printEntities(entities)
-        console.log('') # newline
+        @log('') # newline
         @printNotifications(entities)
-        # TODO console.log("\nOK") when complete
+        # TODO @log("\nOK") when complete
 }
 
 
