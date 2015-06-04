@@ -17,16 +17,13 @@ module.exports = {
     else
       {}
 
-  orgNameByGuid: (guid, callback) ->
+  # returns a Promise
+  orgNameByGuid: (guid) ->
     opts = {
       path: "/v2/organizations/#{guid}/summary"
     }
-    onSuccess = (data) ->
-      callback(null, data.name)
-    onError = (error) ->
-      callback(error)
-
-    client.request(opts).then(onSuccess, onError)
+    client.request(opts).then (data) ->
+      data.name
 
   roomForOrg: (name) ->
     config = @getConfig()
@@ -37,7 +34,12 @@ module.exports = {
 
   roomForEntity: (entity, callback) ->
     guid = entity.organization_guid
-    @orgNameByGuid guid, (err, name) =>
+
+    onSuccess = (name) =>
       room = @roomForOrg(name)
-      callback(err, room)
+      callback(null, room)
+    onError = (error) ->
+      callback(error)
+
+    @orgNameByGuid(guid).then(onSuccess, onError)
 }

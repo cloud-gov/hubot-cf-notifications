@@ -23,12 +23,10 @@ describe 'mapper', ->
       assert.deepEqual(mapper.getConfig(), {})
 
   describe '.orgNameByGuid()', ->
-    it "fetches the name from the API", (done) ->
+    it "fetches the name from the API", ->
       stubOrg.call(this, 'someorg')
-
-      mapper.orgNameByGuid '123456', (err, name)->
+      mapper.orgNameByGuid('123456').then (name)->
         assert.equal(name, 'someorg')
-        done(err)
 
   describe '.roomForEntity()', ->
     entity = null
