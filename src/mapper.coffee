@@ -32,14 +32,9 @@ module.exports = {
       process.env.HUBOT_CF_ROOM ||  # TODO drop environment variable support
       'cf-notifications'
 
-  roomForEntity: (entity, callback) ->
+  # returns a Promise
+  roomForEntity: (entity) ->
     guid = entity.organization_guid
-
-    onSuccess = (name) =>
-      room = @roomForOrg(name)
-      callback(null, room)
-    onError = (error) ->
-      callback(error)
-
-    @orgNameByGuid(guid).then(onSuccess, onError)
+    @orgNameByGuid(guid).then (name) =>
+      @roomForOrg(name)
 }

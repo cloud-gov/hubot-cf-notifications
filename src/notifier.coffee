@@ -3,8 +3,8 @@ mapper = require('./mapper')
 
 module.exports = {
   processEntity: (entity, robot) ->
-    mapper.roomForEntity entity, (err, room) ->
-      # TODO handle error
+    # TODO handle error
+    mapper.roomForEntity(entity).then (room) ->
       envelope = {
         room: room
       }

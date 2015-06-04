@@ -50,21 +50,17 @@ describe 'mapper', ->
       process.chdir(origCwd)
       testTempDir.rmdir()
 
-    it "uses the default room when there isn't a match", (done) ->
+    it "uses the default room when there isn't a match", ->
       writeConfig({})
-
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'cf-notifications')
-        done(err)
 
-    it "allows the default room to be overridden", (done) ->
+    it "allows the default room to be overridden", ->
       writeConfig({ room: 'notification-center' })
-
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'notification-center')
-        done(err)
 
-    it "finds the org that matches the room", (done) ->
+    it "finds the org that matches the room", ->
       writeConfig({
         orgs: {
           myorg: {
@@ -73,6 +69,5 @@ describe 'mapper', ->
         }
       })
 
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'myorgroom')
-        done(err)
