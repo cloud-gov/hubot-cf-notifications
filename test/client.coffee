@@ -9,11 +9,10 @@ credentials = require('../src/credentials')
 
 describe 'client', ->
   describe '.call()', ->
+    # needs to be called with context of the test
     stubWithToken = (accessToken) ->
       promise = new Promise (fulfill, reject) ->
         fulfill(access_token: accessToken)
-
-      # TODO figure out how to hold onto the context
       this.sinon.stub(credentials, 'fetchTokenObj').returns(promise)
 
     it "passes the data to the Promise", ->
