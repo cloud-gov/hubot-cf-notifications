@@ -78,6 +78,12 @@ To run tests:
 npm test
 ```
 
+To run smoke tests against the live API:
+
+```bash
+HUBOT_CF_API_ORIGIN=... HUBOT_CF_UAA_ORIGIN=... HUBOT_CF_USER=hubot-cf-listener HUBOT_CF_PASS=... npm run smoke
+```
+
 ## See also
 
 * [hubot-cf](https://github.com/andypiper/hubot-cf)

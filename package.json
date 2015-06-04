@@ -18,6 +18,7 @@
     "temporary": "0.0.8"
   },
   "scripts": {
+    "smoke": "coffee src/smoke_tests.coffee",
     "test": "mocha"
   },
   "repository": {

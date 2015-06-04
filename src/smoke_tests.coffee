@@ -1,7 +1,7 @@
 util = require('util')
 checker = require('./event_checker')
 
-module.exports.printRecent = ->
+printRecent = ->
   since = new Date()
   since.setHours(since.getHours() - 3)
 
@@ -11,3 +11,5 @@ module.exports.printRecent = ->
       colors: true,
       depth: null
     ))
+
+printRecent()
