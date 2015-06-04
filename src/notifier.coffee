@@ -14,8 +14,9 @@ module.exports = {
     for entity in entities
       @processEntity(entity, robot)
 
+  # returns a Promise
   notify: (since, robot) ->
-    checker.getDeployEntities since, (error, entities) =>
+    checker.getDeployEntities(since).then (entities) =>
       @processEntities(entities, robot)
 
   notifyForDeploys: (robot) ->

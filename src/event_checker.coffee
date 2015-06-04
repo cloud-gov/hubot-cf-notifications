@@ -31,24 +31,24 @@ module.exports = {
   isDeploy: (event) ->
     !@isCfSsh(event) && @isAppStarting(event)
 
-  getDeployEntities: (since, callback) ->
-    onSuccess = (events) =>
+  # returns a Promise
+  getDeployEntities: (since) ->
+    @getUpdateEvents(since).then (events) =>
       entities = (event.entity for event in events when @isDeploy(event))
-      callback(null, entities)
-    onError = (error) ->
-      callback(error)
-
-    @getUpdateEvents(since).then(onSuccess, onError)
+      entities
 
   # for debugging
   printRecent: ->
     since = new Date()
     since.setHours(since.getHours() - 3)
 
-    @getDeployEntities since, (error, entities) ->
-      console.log('error:', error)
+    onSuccess = (entities) ->
       console.log(util.inspect(entities,
         colors: true,
         depth: null
       ))
+    onError = (error) ->
+      console.log('error:', error)
+
+    @getDeployEntities(since).then(onSuccess, onError)
 }
