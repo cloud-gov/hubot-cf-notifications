@@ -6,7 +6,6 @@
   "dependencies": {
     "bluebird": "^2.9.27",
     "deep-extend": "^0.3.3",
-    "request": "^2.55.0",
     "request-promise": "^0.4.2"
   },
   "peerDependencies": {
