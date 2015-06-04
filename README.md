@@ -1,6 +1,6 @@
 # Cloud Foundry Notifications for Hubot
 
-[![Build Status](https://travis-ci.org/18F/hubot-cf-notifications.svg?branch=master)](https://travis-ci.org/18F/hubot-cf-notifications)
+[![Build Status](https://travis-ci.org/18F/hubot-cf-notifications.svg?branch=master)](https://travis-ci.org/18F/hubot-cf-notifications) [![Code Climate](https://codeclimate.com/github/18F/hubot-cf-notifications/badges/gpa.svg)](https://codeclimate.com/github/18F/hubot-cf-notifications)
 
 [Hubot](https://hubot.github.com/) plugin that posts deployment notifications of applications within Cloud Foundry. Example:
 
