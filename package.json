@@ -13,6 +13,7 @@
   "devDependencies": {
     "coffee-coverage": "^0.6.0",
     "coffee-script": "^1.4.0",
+    "coffeelint": "^1.10.1",
     "istanbul": "^0.3.14",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4",
@@ -21,8 +22,9 @@
   },
   "scripts": {
     "coverage": "npm test && ./node_modules/.bin/istanbul report && open coverage/lcov-report/hubot-cf-notifications/src/index.html",
+    "lint": "./node_modules/.bin/coffeelint scripts src test",
     "smoke": "coffee src/smoke_tests.coffee",
-    "test": "mocha"
+    "test": "npm run lint && mocha"
   },
   "repository": {
     "type": "git",
