@@ -21,6 +21,7 @@
   },
   "scripts": {
     "coverage": "npm test && ./node_modules/.bin/istanbul report && open coverage/lcov-report/hubot-cf-notifications/src/index.html",
+    "smoke": "coffee src/smoke_tests.coffee",
     "test": "mocha"
   },
   "repository": {
