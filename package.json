@@ -11,13 +11,16 @@
     "hubot": "2.x"
   },
   "devDependencies": {
+    "coffee-coverage": "^0.6.0",
     "coffee-script": "^1.4.0",
+    "istanbul": "^0.3.14",
     "mocha": "^2.2.4",
     "mocha-sinon": "^1.1.4",
     "nock": "^2.3.0",
     "temporary": "0.0.8"
   },
   "scripts": {
+    "coverage": "npm test && ./node_modules/.bin/istanbul report && open coverage/lcov-report/hubot-cf-notifications/src/index.html",
     "smoke": "coffee src/smoke_tests.coffee",
     "test": "mocha"
   },
