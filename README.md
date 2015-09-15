@@ -38,21 +38,25 @@ Hubot: someuser@myorg.com is deploying someapp
     cf create-user hubot-cf-listener <password>
     ```
 
-1. Add read-only permissions for the organizations/spaces you want notifications for. You can always add more later.
-
-    ```bash
-    cf set-org-role hubot-cf-listener <org> OrgAuditor
-    # or
-    cf set-space-role hubot-cf-listener <org> <space> SpaceAuditor
-    ```
-
 1. Set the following environment variables:
     * `HUBOT_CF_USER` – username of listener user created above
     * `HUBOT_CF_PASS` – password of listener user
     * `HUBOT_CF_API_ORIGIN` – something like `https://api.mycf.com` – look in `~/.cf/config.json` for `Target`
     * `HUBOT_CF_UAA_ORIGIN` – something like `https://uaa.mycf.com` – look in `~/.cf/config.json` for `UaaEndpoint`
 
-## Configuration
+## Adding applications
+
+To get deployment notifications for all applications in an organization/space, run
+
+```bash
+cf set-org-role hubot-cf-listener <org> OrgAuditor
+# or
+cf set-space-role hubot-cf-listener <org> <space> SpaceAuditor
+```
+
+This will give the bot read-only permissions to view the events for those applications, and thus send deployment notifications.
+
+### Configuration
 
 *Optional.* To have notification directed to specific chat rooms/channels, create a `cf_config.json` file in the root of your Hubot directory. All sections are optional.
 
