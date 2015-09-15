@@ -10,11 +10,6 @@
 # Author:
 #   afeld
 
-# check if run directly, for testing
-if require.main is module
-  checker = require('../src/event_checker')
-  checker.printRecent()
-else
-  notifier = require('../src/notifier')
-  module.exports = (robot) ->
-    notifier.notifyForDeploys(robot)
+notifier = require('../src/notifier')
+module.exports = (robot) ->
+  notifier.notifyForDeploys(robot)
