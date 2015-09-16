@@ -4,20 +4,20 @@
   "description": "Plugin to add Cloud Foundry notifications to Hubot",
   "main": "index.coffee",
   "dependencies": {
-    "deep-extend": "^0.3.3",
-    "request": "^2.55.0"
+    "deep-extend": "^0.4.0",
+    "request": "^2.62.0"
   },
   "peerDependencies": {
     "hubot": "2.x"
   },
   "devDependencies": {
-    "coffee-coverage": "^0.6.0",
-    "coffee-script": "^1.4.0",
-    "coffeelint": "^1.10.1",
-    "istanbul": "^0.3.14",
-    "mocha": "^2.2.4",
+    "coffee-coverage": "^0.6.3",
+    "coffee-script": "^1.10.0",
+    "coffeelint": "^1.11.1",
+    "istanbul": "^0.3.20",
+    "mocha": "^2.3.2",
     "mocha-sinon": "^1.1.4",
-    "nock": "^2.3.0",
+    "nock": "^2.11.0",
     "temporary": "0.0.8"
   },
   "scripts": {
