@@ -3,12 +3,19 @@ require('mocha-sinon')()
 
 assert = require('assert')
 fs = require('fs')
+Promise = require('bluebird')
 client = require('../src/client')
 mapper = require('../src/mapper')
 fixtures = require('./support/fixtures')
 temporary = require('temporary')
 
 describe 'mapper', ->
+  # needs to be called with context of the test
+  stubOrg = (name) ->
+    promise = new Promise (fulfill) ->
+      fulfill(name: name)
+    this.sinon.stub(client, 'request').returns(promise)
+
   describe '.getConfig()', ->
     it "handles a missing config file", ->
       # sanity check
@@ -16,12 +23,10 @@ describe 'mapper', ->
       assert.deepEqual(mapper.getConfig(), {})
 
   describe '.orgNameByGuid()', ->
-    it "fetches the name from the API", (done) ->
-      this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'someorg'})
-
-      mapper.orgNameByGuid '123456', (err, name)->
+    it "fetches the name from the API", ->
+      stubOrg.call(this, 'someorg')
+      mapper.orgNameByGuid('123456').then (name)->
         assert.equal(name, 'someorg')
-        done(err)
 
   describe '.roomForEntity()', ->
     entity = null
@@ -35,7 +40,7 @@ describe 'mapper', ->
     beforeEach ->
       event = fixtures.getStartedEvent()
       entity = event.entity
-      this.sinon.stub(client, 'call').callsArgWith(1, null, {}, {name: 'myorg'})
+      stubOrg.call(this, 'myorg')
       origCwd = process.cwd()
       testTempDir = new temporary.Dir()
       process.chdir(testTempDir.path)
@@ -45,21 +50,17 @@ describe 'mapper', ->
       process.chdir(origCwd)
       testTempDir.rmdir()
 
-    it "uses the default room when there isn't a match", (done) ->
+    it "uses the default room when there isn't a match", ->
       writeConfig({})
-
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'cf-notifications')
-        done(err)
 
-    it "allows the default room to be overridden", (done) ->
+    it "allows the default room to be overridden", ->
       writeConfig({ room: 'notification-center' })
-
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'notification-center')
-        done(err)
 
-    it "finds the org that matches the room", (done) ->
+    it "finds the org that matches the room", ->
       writeConfig({
         orgs: {
           myorg: {
@@ -68,6 +69,5 @@ describe 'mapper', ->
         }
       })
 
-      mapper.roomForEntity entity, (err, room) ->
+      mapper.roomForEntity(entity).then (room) ->
         assert.equal(room, 'myorgroom')
-        done(err)

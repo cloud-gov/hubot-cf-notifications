@@ -3,8 +3,8 @@ mapper = require('./mapper')
 
 module.exports = {
   processEntity: (entity, robot) ->
-    mapper.roomForEntity entity, (err, room) ->
-      # TODO handle error
+    # TODO handle error
+    mapper.roomForEntity(entity).then (room) ->
       envelope = {
         room: room
       }
@@ -14,8 +14,9 @@ module.exports = {
     for entity in entities
       @processEntity(entity, robot)
 
+  # returns a Promise
   notify: (since, robot) ->
-    checker.getDeployEntities since, (error, entities) =>
+    checker.getDeployEntities(since).then (entities) =>
       @processEntities(entities, robot)
 
   notifyForDeploys: (robot) ->

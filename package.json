@@ -5,12 +5,13 @@
   "main": "index.coffee",
   "dependencies": {
     "deep-extend": "^0.3.3",
-    "request": "^2.55.0"
+    "request-promise": "^0.4.2"
   },
   "peerDependencies": {
     "hubot": "2.x"
   },
   "devDependencies": {
+    "bluebird": "^2.9.27",
     "coffee-coverage": "^0.6.0",
     "coffee-script": "^1.4.0",
     "coffeelint": "^1.10.1",

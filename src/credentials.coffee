@@ -1,5 +1,5 @@
 # https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-APIs.rst#support-for-additional-authorization-attributes
-request = require('request')
+request = require('request-promise')
 
 
 module.exports = {
@@ -26,12 +26,7 @@ module.exports = {
         password: @password()
     }
 
-  # TODO use promises
-  fetchTokenObj: (callback) ->
-    opts = @requestOpts()
-    request opts, (error, response, token) ->
-      if error
-        console.log('Access Token Error', error)
-      else
-        callback(token)
+  # returns a Promise
+  fetchTokenObj: ->
+    request(@requestOpts())
 }

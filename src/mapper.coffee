@@ -17,12 +17,13 @@ module.exports = {
     else
       {}
 
-  orgNameByGuid: (guid, callback) ->
+  # returns a Promise
+  orgNameByGuid: (guid) ->
     opts = {
       path: "/v2/organizations/#{guid}/summary"
     }
-    client.call opts, (error, response, data) ->
-      callback(error, data.name)
+    client.request(opts).then (data) ->
+      data.name
 
   roomForOrg: (name) ->
     config = @getConfig()
@@ -31,9 +32,9 @@ module.exports = {
       process.env.HUBOT_CF_ROOM ||  # TODO drop environment variable support
       'cf-notifications'
 
-  roomForEntity: (entity, callback) ->
+  # returns a Promise
+  roomForEntity: (entity) ->
     guid = entity.organization_guid
-    @orgNameByGuid guid, (err, name) =>
-      room = @roomForOrg(name)
-      callback(err, room)
+    @orgNameByGuid(guid).then (name) =>
+      @roomForOrg(name)
 }

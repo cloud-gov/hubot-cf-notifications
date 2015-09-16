@@ -13,10 +13,11 @@ module.exports = {
         ]
     }
 
-  getUpdateEvents: (since, callback) ->
+  # returns a Promise
+  getUpdateEvents: (since) ->
     opts = @getRequestOpts(since)
-    client.call opts, (error, response, data) ->
-      callback(error, data.resources)
+    client.request(opts).then (data) ->
+      data.resources
 
   # check for apps deployed to support https://github.com/cloudfoundry-community/cf-ssh
   isCfSsh: (event) ->
@@ -29,11 +30,9 @@ module.exports = {
   isDeploy: (event) ->
     !@isCfSsh(event) && @isAppStarting(event)
 
-  getDeployEntities: (since, callback) ->
-    @getUpdateEvents since, (error, events) =>
-      if error
-        callback(error)
-      else
-        entities = (event.entity for event in events when @isDeploy(event))
-        callback(null, entities)
+  # returns a Promise
+  getDeployEntities: (since) ->
+    @getUpdateEvents(since).then (events) =>
+      entities = (event.entity for event in events when @isDeploy(event))
+      entities
 }
