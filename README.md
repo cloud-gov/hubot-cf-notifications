@@ -97,5 +97,6 @@ HUBOT_CF_API_ORIGIN=... HUBOT_CF_UAA_ORIGIN=... HUBOT_CF_USER=hubot-cf-listener 
 
 ## See also
 
+* [cfbot](https://github.com/jthomas/cfbot)
 * [hubot-cf](https://github.com/andypiper/hubot-cf)
 * [hubot-deploy](https://github.com/atmos/hubot-deploy)
